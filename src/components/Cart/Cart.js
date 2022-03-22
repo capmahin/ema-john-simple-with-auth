@@ -1,9 +1,9 @@
 import React from 'react';
-import './Cart.css'
+import './Cart.css';
 
 const Cart = ({cart}) => {
     return (
-        <div>
+        <div className='cart'>
            <h3>this is menu</h3>
                 <p>Selected items:{cart.length}</p>
         </div>
