@@ -21,12 +21,14 @@ const Shop = () => {
         for(const id in storedCart){
             const addedProduct =products.find(product => product.id === id);
             if(addedProduct){
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
                 savedCart.push(addedProduct);
 
             }
         }
         setCart(savedCart);
-    },[])
+    },[products])
 
     
 
