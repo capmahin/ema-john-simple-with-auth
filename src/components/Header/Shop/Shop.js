@@ -12,7 +12,7 @@ const Shop = () => {
     },[]);
 
     const handleAddToCart = (product) =>{
-        console.log('onclick');
+        console.log(product);
     }
     return (
         <div className='shop-container'>
