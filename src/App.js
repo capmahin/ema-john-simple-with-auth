@@ -2,17 +2,20 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Shop from "./components/Header/Shop/Shop";
-import { Route, Router } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
+import Orders from "./components/Orders/Orders";
+import Inventory from "./components/Inventory/Inventory";
 
 function App() {
   return (
     <div>
       <Header></Header>
-      <Router>
+      <Routes>
         <Route path="/" element={<Shop></Shop>}></Route>
-        <Route path="/home" element={<Shop></Shop>}></Route>
-      </Router>
-      <Shop></Shop>
+        <Route path="/shop" element={<Shop></Shop>}></Route>
+        <Route path="/orders" element={<Orders></Orders>}></Route>
+        <Route path="/inventory" element={<Inventory></Inventory>}></Route>
+      </Routes>
     </div>
   );
 }
