@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import "./SignUp.css";
 import auth from "../../firebase.init";
@@ -9,6 +9,10 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const [createUserWithEmailAndPassword, user] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
@@ -21,6 +25,9 @@ const SignUp = () => {
   const handleConfirmPasswordBlur = (event) => {
     setConfirmPassword(event.target.value);
   };
+  if (user) {
+    navigate("/");
+  }
 
   const handleCreateUser = (event) => {
     event.preventDefault();
@@ -31,13 +38,11 @@ const SignUp = () => {
       setError("password must be 6 character or longer");
     }
     createUserWithEmailAndPassword(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
+      console.log("user created");
     });
   };
 
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [, hookError] = useCreateUserWithEmailAndPassword(auth);
   return (
     <div className="form-container">
       <div>
@@ -75,6 +80,7 @@ const SignUp = () => {
             />
           </div>
           <p style={{ color: "red" }}>{error}</p>
+          <p style={{ color: "red" }}>{hookError}</p>
           <input className="form-submit" type="submit" value="Sign Up" />
         </form>
         <p>
